@@ -1,0 +1,40 @@
+# ==========================================
+# Taiwan AI Stock System
+# V10 Ultimate Enterprise
+# ==========================================
+
+# Core
+pandas>=2.3
+numpy>=2.3
+
+# Excel
+openpyxl>=3.1
+
+# Technical Analysis
+ta>=0.11
+
+# Visualization
+matplotlib>=3.10
+
+# Machine Learning
+scikit-learn>=1.7
+joblib>=1.5
+
+# Web / API
+requests>=2.32
+beautifulsoup4>=4.13
+lxml>=6.0
+
+# Utilities
+tqdm>=4.67
+
+# Notebook
+jupyter>=1.1
+ipykernel>=6.30
+notebook>=7.4
+
+# Optional (Future)
+# xgboost
+# lightgbm
+# optuna
+# shap
