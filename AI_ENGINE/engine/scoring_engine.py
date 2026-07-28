@@ -392,5 +392,69 @@ class ScoringEngine:
             score.priority
 
         )
+        
+    # -------------------------------------------------
+    # Enterprise Output
+    # -------------------------------------------------
+
+    # AI 品質
+    if score.total >= 90:
+        score.quality = "★★★★★"
+    elif score.total >= 80:
+        score.quality = "★★★★☆"
+    elif score.total >= 70:
+        score.quality = "★★★☆☆"
+    elif score.total >= 60:
+        score.quality = "★★☆☆☆"
+    else:
+        score.quality = "★☆☆☆☆"
+
+    # AI 建議
+    if score.total >= 90:
+        score.action = "強力買進"
+    elif score.total >= 80:
+        score.action = "買進"
+    elif score.total >= 70:
+        score.action = "觀察"
+    else:
+        score.action = "略過"
+
+    # AI 風險
+    rr = feature.trade.rr
+
+    if rr >= 4:
+        score.risk = "低"
+    elif rr >= 3:
+        score.risk = "中低"
+    elif rr >= 2:
+        score.risk = "中"
+    else:
+        score.risk = "高"
+
+    # 建議持股天數
+    if score.total >= 90:
+        score.holding_days = "20~30 天"
+    elif score.total >= 80:
+        score.holding_days = "10~20 天"
+    elif score.total >= 70:
+        score.holding_days = "5~10 天"
+    else:
+        score.holding_days = "1~5 天"
+
+    # AI 評論
+    score.comment = (
+        f"AI 評分 {score.total:.1f} 分，"
+        f"RR={rr}，"
+        f"建議：{score.action}"
+    )
+
+    # 進場時機
+    if feature.trend.above_ma20 and feature.momentum.macd_golden:
+        score.entry_timing = "立即"
+    elif feature.trend.above_ma20:
+        score.entry_timing = "等待拉回"
+    else:
+        score.entry_timing = "觀察"
+        
 
         return score
