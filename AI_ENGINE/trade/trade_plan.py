@@ -21,7 +21,6 @@ class TradePlan:
 
     rr: Union[float, str]
 
-    
     rr_score: int
 
 
