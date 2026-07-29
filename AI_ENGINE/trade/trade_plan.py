@@ -17,9 +17,7 @@ class TradePlan:
 
     target3: float
     
-    from typing import Union
-
-    rr: Union[float, str]
+    rr: str
 
     rr_score: int
 
