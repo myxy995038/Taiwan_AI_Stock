@@ -50,7 +50,28 @@ class WeightLoader:
 
             data[key] = value
 
+            
+            
+            
         return AIWeight(
+
+            # ==========================
+            # Feature Weight
+            # ==========================
+
+            ma20=data.get("ma20", 1.0),
+
+            new_high=data.get("new_high", 1.0),
+
+            macd=data.get("macd", 1.0),
+
+            kd=data.get("kd", 1.0),
+
+            rsi=data.get("rsi", 1.0),
+
+            # ==========================
+            # Score Weight
+            # ==========================
 
             money=data.get("money", 1.0),
 
@@ -71,3 +92,6 @@ class WeightLoader:
             priority=data.get("priority", 1.0),
 
         )
+            
+
+      

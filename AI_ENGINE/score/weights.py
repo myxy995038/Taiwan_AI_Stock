@@ -8,10 +8,28 @@ AI Weight Manager
 """
 
 from dataclasses import dataclass, asdict
-
-
+     
+    
 @dataclass
 class AIWeight:
+
+    # =====================================
+    # Feature Weight（Learning Center）
+    # =====================================
+
+    ma20: float = 1.0
+
+    new_high: float = 1.0
+
+    macd: float = 1.0
+
+    kd: float = 1.0
+
+    rsi: float = 1.0
+
+    # =====================================
+    # Score Weight（Engine）
+    # =====================================
 
     money: float = 1.0
 
@@ -30,6 +48,8 @@ class AIWeight:
     theme: float = 1.0
 
     priority: float = 1.0
+    
+    
 
     def to_dict(self):
 
