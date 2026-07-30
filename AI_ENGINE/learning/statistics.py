@@ -240,7 +240,15 @@ class StatisticsEngine:
 
             )
 
-        return pd.DataFrame(rows)
+        
+        return (
+            pd.DataFrame(rows)
+            .sort_values(
+                by="FactorPower",
+                ascending=False
+            )
+            .reset_index(drop=True)
+        )
 
     # -------------------------------------------------
     # Summary
@@ -263,5 +271,14 @@ class StatisticsEngine:
             "best_return": self.best_return(),
 
             "worst_return": self.worst_return(),
+            
+            "total_profit": float(
+                self.df["return_rate"].sum()
+            ) if not self.df.empty else 0.0,
+            
+            
+            "median_return": float(
+                self.df["return_rate"].median()
+            ) if not self.df.empty else 0.0,
 
         }

@@ -53,7 +53,7 @@ class PerformanceHistory:
 
     # -------------------------------------------------
 
-    def save(self):
+    def save(self, backup=True):
 
         df = self.to_dataframe()
 
@@ -64,6 +64,10 @@ class PerformanceHistory:
             exist_ok=True,
 
         )
+        
+        if backup:
+
+            self.backup()
 
         df.to_excel(
 
@@ -100,3 +104,69 @@ class PerformanceHistory:
         ]
 
         return self.records
+        
+    # -------------------------------------------------    
+        
+        
+    def exists(self):
+
+        return self.file.exists()
+    
+    
+    
+    # -------------------------------------------------
+    
+    
+    def latest(self):
+
+        if len(self.records) == 0:
+
+            return None
+
+        return self.records[-1]
+    
+    # -------------------------------------------------
+    
+    def append(self, record):
+
+        if isinstance(record, LearningRecord):
+
+            self.records.append(record)
+
+        else:
+
+            self.records.append(
+
+                LearningRecord(**record)
+
+            )
+    
+    
+    # -------------------------------------------------
+    
+    
+    
+    import shutil
+    from datetime import datetime
+
+    def backup(self):
+
+        if not self.exists():
+
+            return
+
+        backup_folder = self.file.parent / "backup"
+
+        backup_folder.mkdir(exist_ok=True)
+
+        backup_file = backup_folder / (
+
+            f"{self.file.stem}_"
+
+            f"{datetime.now():%Y%m%d_%H%M%S}"
+
+            ".xlsx"
+
+        )
+
+        shutil.copy(self.file, backup_file)

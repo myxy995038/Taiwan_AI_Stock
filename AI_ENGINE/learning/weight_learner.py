@@ -18,97 +18,7 @@ class WeightLearner:
 
     # -------------------------------------------------
 
-    def calc_weight(
 
-        self,
-
-        factor_power,
-
-        success_rate,
-
-        avg_return,
-
-        samples,
-
-    ):
-
-        #
-        # 基本倍率
-        #
-
-        weight = 1.0
-
-        #
-        # Factor Power
-        #
-
-        if factor_power >= 20:
-
-            weight += 0.20
-
-        elif factor_power >= 10:
-
-            weight += 0.10
-
-        elif factor_power >= 5:
-
-            weight += 0.05
-
-        #
-        # 勝率
-        #
-
-        if success_rate >= 0.70:
-
-            weight += 0.10
-
-        elif success_rate >= 0.60:
-
-            weight += 0.05
-
-        #
-        # 平均報酬
-        #
-
-        if avg_return >= 8:
-
-            weight += 0.10
-
-        elif avg_return >= 5:
-
-            weight += 0.05
-
-        #
-        # 樣本數
-        #
-
-        if samples >= 500:
-
-            weight += 0.10
-
-        elif samples >= 100:
-
-            weight += 0.05
-
-        #
-        # 上限
-        #
-
-        weight = min(
-
-            weight,
-
-            1.50,
-
-        )
-
-        return round(
-
-            weight,
-
-            2,
-
-        )
 
     # -------------------------------------------------
 
@@ -120,28 +30,31 @@ class WeightLearner:
 
     ):
 
+
+
         mapping = {
 
-            "money_score": "money",
+            "成交值分數":"money",
 
-            "liquidity_score": "liquidity",
+            "流動性分數":"liquidity",
 
-            "trend_score": "trend",
+            "趨勢分數":"trend",
 
-            "momentum_score": "momentum",
+            "動能分數":"momentum",
 
-            "institution_score": "institution",
+            "法人共振分數":"institution",
 
-            "trade_score": "trade",
+            "RR加權分數":"trade",
 
-            "revenue_score": "revenue",
+            "營收分數":"revenue",
 
-            "theme_score": "theme",
+            "題材":"theme",
 
-            "priority_score": "priority",
+            "Priority":"priority",
 
         }
-
+        
+        
         for _, row in factor_df.iterrows():
 
             factor = row["Factor"]
@@ -150,26 +63,14 @@ class WeightLearner:
 
                 continue
 
-            value = self.calc_weight(
-
-                row["FactorPower"],
-
-                row["SuccessRate"],
-
-                row["AvgReturn"],
-
-                row["Samples"],
-
-            )
-
             setattr(
 
                 self.weight,
 
                 mapping[factor],
 
-                value,
-
+                row["WeightSuggestion"]
+        
             )
 
         return self.weight
