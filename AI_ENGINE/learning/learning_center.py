@@ -19,6 +19,7 @@ from AI_ENGINE.learning import (
     WeightLearner,
 )
 
+from AI_ENGINE.learning.models import LearningRecord
 
 class LearningCenter:
 
@@ -141,7 +142,70 @@ class LearningCenter:
     
     # -------------------------------------------------
     
-    def run(self):
+   
+
+    def append_today(
+        self,
+        result_df,
+    ):
+
+        history = PerformanceHistory(
+            self.history_file
+        )
+
+        history.load()
+
+        for _, row in result_df.iterrows():
+
+            record = LearningRecord(
+
+                stock_id=str(row["代號"]),
+                stock_name=row["名稱"],
+                date=str(row["日期"]),
+
+                total_score=row["總分"],
+
+                money_score=row["成交值分數"],
+                liquidity_score=row["流動性分數"],
+                trend_score=row["趨勢分數"],
+                momentum_score=row["動能分數"],
+                institution_score=row["法人共振分數"],
+                trade_score=row["RR加權分數"],
+                revenue_score=row["營收分數"],
+                theme_score=row["題材分數"],
+                priority_score=row["Priority"],
+
+                rr=row["RR數值"],
+
+                return_rate=row.get("漲跌%", 0),
+
+                holding_days=0,
+
+                success=row.get("漲跌%", 0) > 0,
+
+                theme=row["題材"],
+
+                comment=row["AI評論"],
+
+                quality=row["AI品質(總分)"],
+
+                action=row["建議"],
+
+                entry_timing=row["建議進場時機"],
+
+            )
+
+            history.add(record)
+
+        history.save()
+    
+    
+    # -------------------------------------------------    
+             
+        
+    def run(
+        self,
+    ):    
 
         #
         # 讀取歷史
@@ -195,9 +259,3 @@ class LearningCenter:
 
         )
     
-    
-    
-    
-    
-
-  

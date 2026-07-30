@@ -53,3 +53,9 @@ class LearningRecord:
     theme: str = ""
 
     comment: str = ""
+    
+    quality: str = ""
+
+    action: str = ""
+
+    entry_timing: str = ""
