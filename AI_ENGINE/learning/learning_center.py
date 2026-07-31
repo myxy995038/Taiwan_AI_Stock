@@ -173,7 +173,7 @@ class LearningCenter:
                 trade_score=row["RR加權分數"],
                 revenue_score=row["營收分數"],
                 theme_score=0,
-                priority_score=row["Priority"],
+                priority_score=0,
 
                 rr=row["RR數值"],
 
