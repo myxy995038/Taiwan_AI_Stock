@@ -161,7 +161,7 @@ class LearningCenter:
 
                 stock_id=str(row["代號"]),
                 stock_name=row["名稱"],
-                date=str(row["日期"]),
+                date=str(pd.Timestamp.today().date()),
 
                 total_score=row["總分"],
 
