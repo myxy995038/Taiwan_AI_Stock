@@ -172,7 +172,7 @@ class LearningCenter:
                 institution_score=row["法人共振分數"],
                 trade_score=row["RR加權分數"],
                 revenue_score=row["營收分數"],
-                theme_score=row["題材分數"],
+                theme_score=0,
                 priority_score=row["Priority"],
 
                 rr=row["RR數值"],
@@ -189,9 +189,9 @@ class LearningCenter:
 
                 quality=row["AI品質(總分)"],
 
-                action=row["建議"],
+                action=row["AI建議"],
 
-                entry_timing=row["建議進場時機"],
+                entry_timing=row["AI進場時機"],
 
             )
 
