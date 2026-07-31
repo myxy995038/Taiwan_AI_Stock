@@ -11,6 +11,8 @@ from dataclasses import asdict
 from pathlib import Path
 from datetime import datetime
 
+
+import shutil
 import pandas as pd
 
 from AI_ENGINE.learning.models import LearningRecord
