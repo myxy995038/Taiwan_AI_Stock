@@ -16,7 +16,7 @@ from pathlib import Path
 from AI_ENGINE.learning import (
     PerformanceHistory,
     StatisticsEngine,
-    WeightLearner,
+    
 )
 
 from AI_ENGINE.learning.models import LearningRecord
@@ -223,39 +223,13 @@ class LearningCenter:
         # Statistics
         #
 
-        statistics = StatisticsEngine(
-
-            records,
-
-        )
-
-        factor_df = statistics.factor_statistics()
-
-        #
-        # Weight Learn
-        #
-
-        learner = WeightLearner()
-
-        weight = learner.learn(
-
-            factor_df,
-
-        )
         
-        self.save_weight(
+               
+        statistics = StatisticsEngine(records)
 
-            weight
+        summary = statistics.summary()
 
-        )
+        print("Learning Center Updated")
 
-        return (
-
-            weight,
-
-            factor_df,
-
-            statistics.summary(),
-
-        )
+        return summary
     
