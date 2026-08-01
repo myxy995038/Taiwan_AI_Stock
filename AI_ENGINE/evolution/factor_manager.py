@@ -107,15 +107,19 @@ class FactorManager:
             if factor not in mapping:
                 continue
 
+
+            
             weight_rows.append({
 
                 "Factor": factor,
 
                 "Weight": mapping[factor],
 
-                "Enabled": row["Enabled"],
+                "Enabled": row.get("Enabled", True),
 
             })
+            
+            
 
         pd.DataFrame(weight_rows).to_excel(
 

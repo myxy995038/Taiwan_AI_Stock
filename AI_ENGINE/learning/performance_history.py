@@ -7,9 +7,12 @@ Performance History
 ==========================================================
 """
 
+from AI_ENGINE.utils.schema import SchemaManager
+from AI_ENGINE.utils.schemas import PERFORMANCE_SCHEMA
 from dataclasses import asdict
 from pathlib import Path
 from datetime import datetime
+
 
 
 import shutil
@@ -92,7 +95,15 @@ class PerformanceHistory:
 
             return []
 
+       
+        
         df = pd.read_excel(self.file)
+
+        df = SchemaManager.ensure(
+            df,
+            PERFORMANCE_SCHEMA,
+        )
+        
 
         self.records = [
 
