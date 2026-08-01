@@ -10,6 +10,7 @@ Retrain Manager
 from pathlib import Path
 
 from AI_ENGINE.learning.learning_center import LearningCenter
+from AI_ENGINE.learning.feature_importance import FeatureImportance
 from AI_ENGINE.evolution.factor_manager import FactorManager
 
 
@@ -32,6 +33,10 @@ class RetrainManager:
         )
 
         self.factor = FactorManager(
+            self.performance_file,
+        )
+        
+        self.importance = FeatureImportance(
             self.performance_file,
         )
 
@@ -77,14 +82,31 @@ class RetrainManager:
         result_df,
     ):
 
-        self.update_history(
-            result_df,
-        )
+
+        self.update_history(result_df)
 
         self.update_factor()
 
         self.learning_center()
 
+        self.update_importance()
+
         print("===================================")
         print("AI Retraining Completed")
         print("===================================")
+        
+        
+        
+        
+    # -------------------------------------------------
+
+    def update_importance(self):
+
+        print("===================================")
+        print("STEP 4 更新 Feature Importance")
+        print("===================================")
+
+        self.importance.run()
+    
+    
+    # -------------------------------------------------
