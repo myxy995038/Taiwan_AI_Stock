@@ -33,24 +33,27 @@ class WeightLearner:
 
 
         mapping = {
+        
+        
+            "money_score": "money",
 
-            "成交值分數":"money",
+            "liquidity_score": "liquidity",
 
-            "流動性分數":"liquidity",
+            "trend_score": "trend",
 
-            "趨勢分數":"trend",
+            "momentum_score": "momentum",
 
-            "動能分數":"momentum",
+            "institution_score": "institution",
 
-            "法人共振分數":"institution",
+            "trade_score": "trade",
 
-            "RR加權分數":"trade",
+            "revenue_score": "revenue",
 
-            "營收分數":"revenue",
+            "theme_score": "theme",
 
-            "題材":"theme",
+            "priority_score": "priority",
 
-            "Priority":"priority",
+           
 
         }
         
