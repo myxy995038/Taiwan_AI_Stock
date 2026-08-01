@@ -1,6 +1,9 @@
 import pandas as pd
 from pathlib import Path
 
+from AI_ENGINE.utils.schema import SchemaManager
+from AI_ENGINE.utils.schemas import FACTOR_HISTORY_SCHEMA
+
 
 class FactorHistory:
 
@@ -11,9 +14,17 @@ class FactorHistory:
     def load(self):
 
         if not self.file.exists():
+
             return pd.DataFrame()
 
-        return pd.read_excel(self.file)
+        df = pd.read_excel(self.file)
+
+        df = SchemaManager.ensure(
+            df,
+            FACTOR_HISTORY_SCHEMA,
+        )
+
+        return df
 
     def save(self, df):
 
